@@ -27,6 +27,9 @@ class MqttSubscriber:
         else:
             print("Callback is not callable")
 
+    def close(self):
+        self.client.loop_stop()
+        self.client.disconnect()
 
 class MqttPublisher:
     def __init__(self,address:str="localhost",port:int=1883) -> None:
