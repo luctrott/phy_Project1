@@ -38,4 +38,7 @@ class MqttPublisher:
         self.client.loop_start()
     def publish(self,topic:str,message:str):
         self.client.publish(topic,message)
-
+    def close(self):
+        self.client.loop_stop()
+        self.client.disconnect()
+        
