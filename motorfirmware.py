@@ -25,3 +25,4 @@ if __name__ == "__main__":
     motor = MotorFirmware(config.TOPIC_MOTOR,config.MOTOR_IX_PIN,config.BROKER)
     input("Press Enter to continue...")
     motor.close()
+     
