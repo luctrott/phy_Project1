@@ -3,13 +3,14 @@ import config
 import sqlite3
 import time
 
-class MotorSub(MqttSubscriber):
+class MotorSub:
     def __init__(self, broker:str, topic:str, db:str)->None:
-        super().__init__(broker, topic)
+        self.client = MqttSubscriber(broker)
         self.db = db
-        self.conn = sqlite3.connect(self.db)
+        self.conn = sqlite3.connect(self.db, check_same_thread=False)
         self.cur = self.conn.cursor()
-        self.subscribe(topic)
+        self.client.change_callback(self.on_message)
+        self.client.subscribe(topic)
 
         
 
@@ -30,13 +31,8 @@ class MotorSub(MqttSubscriber):
         self.cur.execute("SELECT * FROM nachricht")
         return self.cur.fetchall()
     
-    def run(self):
-        self.client.loop_forever()
     
-    def __del__(self):
-        self.conn.close()
-        self.client.disconnect()
-
+    
 if __name__ == "__main__":
     motor = MotorSub(config.BROKER, config.TOPIC_MOTOR, config.DB_NAME)
-    motor.run()
+    input("Press Enter to continue...")
