@@ -7,4 +7,7 @@ BROKER = "192.168.130.12"
 TOPIC_MOTOR = f'motors/{MOTOR_NAME}/control'
 # pin config for the motor
 MOTOR_IX_PIN = 17
+MOTOR_IX_ID = 1
+
+DB_NAME = "db.db"
  
