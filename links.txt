@@ -1,1 +1,5 @@
 http://www.steves-internet-guide.com/install-mosquitto-linux/
+
+sudo apt-get install mosquitto mosquitto-clients
+cp mosquitto.conf /etc/mosquitto/conf.d/mosquitto.conf
+sudo service mosquitto restart
